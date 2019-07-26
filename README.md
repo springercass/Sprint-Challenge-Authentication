@@ -29,9 +29,21 @@ Implement an User Authentication System in order to access the jokes from the Jo
 Demonstrate your understanding of this week's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
 1. What is the purpose of using _sessions_?
+
+sessions are used to store information about a user to the server. when a session is active, a user's identity can be authorized from that session, instead of having to re authenticate the user for every new request made by the user
+
 1. What does bcrypt do to help us store passwords in a secure manner.
+
+bcrypt hashes passwords to prevent them from being stored in plain text
+
 1. What does bcrypt do to slow down attackers?
+
+passwords can be hashed many times and it makes it harder for attackers to reverse the hashes while trying to uncover the passwords
+
 1. What are the three parts of the JSON Web Token?
+   the header is an algorithm that contains the token type
+   the payload is the part fo the token that stores user information
+   the signature is the verification needed to access or change the token, made by a secret
 
 ## Project Set Up
 
@@ -48,9 +60,9 @@ Follow these steps for completing your project:
 
 - [ ] `cd` into the root of the project and run `yarn` to install dependencies.
 - [ ] Once you have your `node_modules` go ahead and run `yarn server` or `npm run server` to start your node server.
-- [ ] Submit a Pull-Request to merge <firstName-lastName> Branch into master (student's  Repo).
+- [ ] Submit a Pull-Request to merge <firstName-lastName> Branch into master (student's Repo).
 - [ ] Add your Project Manager as a Reviewer on the Pull-request
-- [ ] PM then will count the HW as done by  merging the branch back into master.
+- [ ] PM then will count the HW as done by merging the branch back into master.
 
 Helpful Tip on Testing this Project:
 
@@ -58,14 +70,14 @@ Helpful Tip on Testing this Project:
 
 ## Minimum Viable Product
 
-- [ ] Implement the `register` function inside `/config/routes.js`.
-- [ ] Implement the `login` function inside `/config/routes.js`.
-- [ ] Use JSON Web Tokens for authentication.
+- [x] Implement the `register` function inside `/config/routes.js`.
+- [x] Implement the `login` function inside `/config/routes.js`.
+- [x] Use JSON Web Tokens for authentication.
 - [ ] Add at least 2 tests for the API endpoints.
 
 **Note** The migrations and a database with empty users is already included
 
-- [ ] Add the authentication related code. If everything is done correctly, visiting `/api/jokes` should return a list of jokes.
+- [x] Add the authentication related code. If everything is done correctly, visiting `/api/jokes` should return a list of jokes.
 
 ## Stretch Problem: Build a front end to interface with your User Auth System
 
