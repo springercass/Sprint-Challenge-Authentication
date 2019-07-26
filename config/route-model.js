@@ -1,4 +1,4 @@
-const authDb = require("../database/dbConfig");
+const usersDb = require("../database/dbConfig");
 
 module.exports = {
   add,
@@ -8,15 +8,15 @@ module.exports = {
 };
 
 function find() {
-  return authDb("users").select("id", "username", "password");
+  return usersDb("users").select("id", "username", "password");
 }
 
 function findBy(filter) {
-  return authDb("users").where(filter);
+  return usersDb("users").where(filter);
 }
 
 function add(user) {
-  return authDb("users")
+  return usersDb("users")
     .insert(user, "id")
     .then(ids => {
       const [id] = ids;
@@ -25,7 +25,7 @@ function add(user) {
 }
 
 function findById(id) {
-  return authDb("users")
+  return usersDb("users")
     .where({ id })
     .first();
 }

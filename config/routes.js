@@ -3,12 +3,12 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const secrets = require("../config/secrets");
 
-const { authenticate } = require("../auth/authenticate");
+const { authenticate, isRequired } = require("../auth/authenticate");
 const Auth = require("./route-model");
 
 module.exports = server => {
-  server.post("/api/register", register);
-  server.post("/api/login", login);
+  server.post("/api/register", isRequired, register);
+  server.post("/api/login", isRequired, login);
   server.get("/api/jokes", authenticate, getJokes);
 };
 
@@ -34,7 +34,6 @@ function login(req, res) {
     .then(user => {
       if (user && bcrypt.compareSync(password, user.password)) {
         const token = generateToken(user);
-        console.log("token", token);
         res.status(200).json({
           message: `Welcome ${user.username}!`,
           token
