@@ -8,15 +8,15 @@ module.exports = {
 };
 
 function find() {
-  return authDb("auth").select("id", "username", "password");
+  return authDb("users").select("id", "username", "password");
 }
 
 function findBy(filter) {
-  return authDb("auth").where(filter);
+  return authDb("users").where(filter);
 }
 
 function add(user) {
-  return authDb("auth")
+  return authDb("users")
     .insert(user, "id")
     .then(ids => {
       const [id] = ids;
@@ -25,7 +25,7 @@ function add(user) {
 }
 
 function findById(id) {
-  return authDb("auth")
+  return authDb("users")
     .where({ id })
     .first();
 }

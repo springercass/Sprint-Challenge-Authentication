@@ -1,6 +1,7 @@
 const axios = require("axios");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const secrets = require("../config/secrets");
 
 const { authenticate } = require("../auth/authenticate");
 const Auth = require("./route-model");
@@ -33,6 +34,7 @@ function login(req, res) {
     .then(user => {
       if (user && bcrypt.compareSync(password, user.password)) {
         const token = generateToken(user);
+        console.log("token", token);
         res.status(200).json({
           message: `Welcome ${user.username}!`,
           token
@@ -44,6 +46,19 @@ function login(req, res) {
     .catch(error => {
       res.status(500).json(error);
     });
+}
+
+function generateToken(user) {
+  const jwtPayload = {
+    subject: user.id,
+    username: user.username
+  };
+
+  const jwtOptions = {
+    expiresIn: "1d"
+  };
+
+  return jwt.sign(jwtPayload, secrets.jwtSecret, jwtOptions);
 }
 
 function getJokes(req, res) {
